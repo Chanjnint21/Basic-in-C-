@@ -1,0 +1,42 @@
+# Instruction in picture file
+
+#include <stdbool.h>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int closed =0, opened = 0;
+    bool locker[457]; // locker open = true, closed = false
+  
+    // player 1 opens all lockers
+    for (int i = 1; i <= 456; ++i) {
+      locker[i] = true;
+    }
+    // player 2 close all lockers start from locker 2
+    for (int i = 2; i <= 456; ++i) {
+      locker[i] = false;
+    }
+    // the next player open/close the locker
+    for (int i = 3; i <= 456; ++i) {
+      for (int j = i; j <= 456; j += i) {
+        locker[j] = !locker[j];
+      }
+    }
+    // display results
+    for(int k=0; k<456; k++){
+      if(locker[k] == false)
+        closed = closed + 1;
+      else 
+        opened = opened + 1;
+        
+  }
+  cout << "opened locker " << opened <<" closed locker "<< closed <<endl;
+  cout << "Here are open lockers:"<<endl;
+  for (int i = 1; i <= 456; ++i) {
+    if (locker[i]){
+      cout << i << " ";
+    }
+  }
+  return 0;
+}
+
